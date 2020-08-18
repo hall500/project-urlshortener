@@ -47,13 +47,21 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.post("/api/shorturl/new", function(req, res){
-  let url = req.body.url;
+  var url = req.body.url;
   dns.lookup(url.split("://")[1], function (err, address, family) {
     if(err){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    let url = new shorturl({ original_url: url, short_url: 1 });
+    var surl = new shorturl({ original_url: url, short_url: 1 });
+    surl.save(function(err, data){
+      if(err) {
+        res.json({ "error": "unable to save" });
+        res.end();
+      }
+      res.json(data);
+      res.end();
+    });
     shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
         console.log(item[0])
     })
