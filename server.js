@@ -10,6 +10,10 @@ var cors = require('cors');
 
 var app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
+
 // Basic Configuration 
 var port = process.env.PORT || 3000;
 
@@ -34,7 +38,7 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.post("/api/shorturl/new", function(req, res){
-  
+  res.send(req.body.url);
 });
 
 app.listen(port, function () {
