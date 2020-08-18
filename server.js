@@ -38,7 +38,14 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.post("/api/shorturl/new", function(req, res){
-  res.send(req.body.url);
+  var w3 = dns.lookup(req.body.url, function (err, address, family) {
+    console.log(address);
+  });
+  res.send(w3);
+  res.json({
+    "original_url": req.body.url,
+    "short_url": 1
+  })
 });
 
 app.listen(port, function () {
