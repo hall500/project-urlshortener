@@ -3,6 +3,7 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+const dns = require('dns');
 
 var cors = require('cors');
 
