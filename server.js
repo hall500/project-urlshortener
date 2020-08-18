@@ -20,6 +20,7 @@ var port = process.env.PORT || 3000;
 /** this project needs a db !! **/ 
 // mongoose.connect(process.env.DB_URI);
 
+
 app.use(cors());
 
 /** this project needs to parse POST bodies **/
@@ -44,9 +45,13 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    res.writeHead(301, {Location: url});
-    res.end();
+    
   });
+});
+
+app.get("/api/shorturl/:short", function(req, res){
+  res.writeHead(301, {Location: url});
+  res.end();
 });
 
 app.listen(port, function () {
