@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true, useUnifiedTopology: true });
+
 var Schema = mongoose.Schema;
 
 var ShortURLSchema = new Schema({
