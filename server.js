@@ -3,7 +3,8 @@
 var express = require('express');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-const dns = require('dns');
+var dns = require('dns');
+var bodyParser = require('body-parser');
 
 var cors = require('cors');
 
@@ -32,6 +33,9 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.post("/api/shorturl/new", function(req, res){
+  
+});
 
 app.listen(port, function () {
   console.log('Node.js listening ...');
