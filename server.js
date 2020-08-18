@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-// mongoose.connect(process.env.DB_URI);
-
+mongoose.connect(process.env.DB_URI);
+var Schema = mongoose.Schema;
 
 app.use(cors());
 
@@ -50,7 +50,7 @@ app.post("/api/shorturl/new", function(req, res){
 });
 
 app.get("/api/shorturl/:short", function(req, res){
-  res.writeHead(301, {Location: url});
+  res.writeHead(301, {Location: '/'});
   res.end();
 });
 
