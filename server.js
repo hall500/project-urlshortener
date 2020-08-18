@@ -53,7 +53,7 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
+    shorturl.find({}).sort({_id: -1}).limit(1).then(function(item){
         var shorturlcount = 0;
         if(item.length === 0) shorturlcount = 1;
         else shorturlcount = item[0].short_url + 1;
@@ -73,9 +73,13 @@ app.post("/api/shorturl/new", function(req, res){
 });
 
 app.get("/api/shorturl/:short", function(req, res){
-  
-  res.writeHead(301, {Location: '/'});
+  let shorturl = req.params.short;
+  shorturl.find({}).limit(1).then(function(item){
+    console.log(item);
+  });
   res.end();
+  /*res.writeHead(301, {Location: '/'});
+  res.end();*/
 });
 
 app.listen(port, function () {
