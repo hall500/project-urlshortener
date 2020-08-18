@@ -55,12 +55,10 @@ app.post("/api/shorturl/new", function(req, res){
     }
     shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
         var shorturlcount = 0;
-        if(item === undefined) shorturlcount = 1;
-        else shorturlcount = item.shorturl;
-        
-       console.log(item)
-      
-        /*var surl = new shorturl({ original_url: url, short_url: shorturlcount });
+        if(item.length === 0) shorturlcount = 1;
+        else shorturlcount = item[0].shorturl;
+        console.log(item);
+        var surl = new shorturl({ original_url: url, short_url: shorturlcount });
         surl.save(function(err, data){
           if(err) {
             res.json({ "error": "unable to save" });
@@ -68,7 +66,7 @@ app.post("/api/shorturl/new", function(req, res){
           }
           res.json(data);
           res.end();
-        });*/
+        });
     });
   });
 });
