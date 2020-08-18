@@ -21,10 +21,12 @@ var port = process.env.PORT || 3000;
 mongoose.connect(process.env.DB_URI);
 var Schema = mongoose.Schema;
 
-var ShortURL = new Schema({
+var ShortURLSchema = new Schema({
   original_url: String,
   short_url: Number
 });
+
+var ShortURL = mongoose.model('ShortURL', ShortURLSchema);
 
 app.use(cors());
 
@@ -50,7 +52,10 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    
+    let surl = new ShortURL({ 
+      original_url: url,
+      short_url: 1
+    });
   });
 });
 
