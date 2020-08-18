@@ -21,6 +21,11 @@ var port = process.env.PORT || 3000;
 mongoose.connect(process.env.DB_URI);
 var Schema = mongoose.Schema;
 
+var ShortURL = new Schema({
+  original_url: String,
+  short_url: Number
+});
+
 app.use(cors());
 
 /** this project needs to parse POST bodies **/
@@ -50,6 +55,7 @@ app.post("/api/shorturl/new", function(req, res){
 });
 
 app.get("/api/shorturl/:short", function(req, res){
+  
   res.writeHead(301, {Location: '/'});
   res.end();
 });
