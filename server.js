@@ -53,7 +53,12 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    var surl = new shorturl({ original_url: url, short_url: 1 });
+    var shorturl = 0;
+    shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
+        if(item === undefined) shorturl = 1;
+        else shorturl = item.shorturl;
+    });
+    var surl = new shorturl({ original_url: url, short_url: shorturl });
     surl.save(function(err, data){
       if(err) {
         res.json({ "error": "unable to save" });
@@ -62,14 +67,6 @@ app.post("/api/shorturl/new", function(req, res){
       res.json(data);
       res.end();
     });
-    shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
-        console.log(item[0])
-    })
-    res.end();
-    /*let surl = new ShortURL({ 
-      original_url: url,
-      short_url: 1
-    });*/
   });
 });
 
