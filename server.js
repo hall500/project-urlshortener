@@ -56,16 +56,17 @@ app.post("/api/shorturl/new", function(req, res){
     shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
         var shorturlcount = 0;
         if(item.length === 0) shorturlcount = 1;
-        else shorturlcount = item[0].shorturl;
-        console.log(item);
+        else shorturlcount = item[0].short_url + 1;
+      
         var surl = new shorturl({ original_url: url, short_url: shorturlcount });
         surl.save(function(err, data){
           if(err) {
             res.json({ "error": "unable to save" });
-            res.end();
           }
-          res.json(data);
-          res.end();
+          res.json({
+            original_url: data.original_url,
+            short_url: data.short_url
+          });
         });
     });
   });
