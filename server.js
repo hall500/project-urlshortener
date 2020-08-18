@@ -38,9 +38,14 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.post("/api/shorturl/new", function(req, res){
-  dns.lookup(req.body.url.split("://")[1], function (err, address, family) {
-    if(err) res.json({"error":"invalid URL"})
-    res.send(address)
+  let url = req.body.url;
+  dns.lookup(url.split("://")[1], function (err, address, family) {
+    if(err){
+      res.json({"error":"invalid URL"});
+      res.end();
+    }
+    res.writeHead(301, {Location: url});
+    res.end();
   });
 });
 
