@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;
 
 /** this project needs a db !! **/ 
-mongoose.connect(process.env.DB_URI);
+mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 var Schema = mongoose.Schema;
 
 var ShortURLSchema = new Schema({
@@ -52,10 +52,14 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    let surl = new ShortURL({ 
+    ShortURL.find({}).sort({_id: -1}).limit(1).then((item) => {
+        console.log(item[0])
+    })
+    res.end();
+    /*let surl = new ShortURL({ 
       original_url: url,
       short_url: 1
-    });
+    });*/
   });
 });
 
