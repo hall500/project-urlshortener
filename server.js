@@ -27,7 +27,7 @@ var ShortURLSchema = new Schema({
   short_url: Number
 });
 
-var ShortURL = mongoose.model('ShortURL', ShortURLSchema);
+var shorturl = mongoose.model('shorturl', ShortURLSchema);
 
 app.use(cors());
 
@@ -53,7 +53,8 @@ app.post("/api/shorturl/new", function(req, res){
       res.json({"error":"invalid URL"});
       res.end();
     }
-    ShortURL.find({}).sort({_id: -1}).limit(1).then((item) => {
+    let url = new shorturl({ original_url: url, short_url: 1 });
+    shorturl.find({}).sort({_id: -1}).limit(1).then((item) => {
         console.log(item[0])
     })
     res.end();
