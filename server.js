@@ -73,13 +73,14 @@ app.post("/api/shorturl/new", function(req, res){
 });
 
 app.get("/api/shorturl/:short", function(req, res){
-  let shorturl = req.params.short;
+  let short = req.params.short;
   shorturl.find({}).limit(1).then(function(item){
     console.log(item);
+    /*res.writeHead(301, {Location: item[0].original_url});
+  res.end();*/
   });
   res.end();
-  /*res.writeHead(301, {Location: '/'});
-  res.end();*/
+  
 });
 
 app.listen(port, function () {
