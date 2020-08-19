@@ -73,13 +73,13 @@ app.post("/api/shorturl/new", function(req, res){
 });
 
 app.get("/api/shorturl/:short", function(req, res){
-  let short = req.params.short;
+  var short = req.params.short;
+  if(!Number.isInteger())
   shorturl.find({ short_url: short }).limit(1).then(function(item){
-    console.log(item);
-    if(item.length === 0) res.json({ "error": "Wrong format" })
+    if(item.length === 0) res.json({ "error": "URL unavailable" });
     else res.writeHead(301, {Location: item[0].original_url});
+    res.end();
   });
-  res.end();
 });
 
 app.listen(port, function () {
