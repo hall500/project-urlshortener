@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # API Project: URL Shortener Microservice for freeCodeCamp
 
 [![Run on Repl.it](https://repl.it/badge/github/freeCodeCamp/boilerplate-project-urlshortener)](https://repl.it/github/freeCodeCamp/boilerplate-project-urlshortener)
@@ -20,3 +21,7 @@ POST [project_url]/api/shorturl/new - body (urlencoded) :  url=https://www.googl
 #### Will redirect to:
 
 https://www.freecodecamp.org/forum/
+=======
+# boilerplate-project-urlshortener
+A boilerplate for a freeCodeCamp project.
+>>>>>>> fa420da4d3a5c040f3619ef23f3e9b47ada4766d
